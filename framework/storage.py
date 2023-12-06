@@ -57,11 +57,14 @@ class StorageManager:
 
         try:
             cursor = self._connection.cursor()
+            
+            
 
             command = "SELECT rowid, * FROM {}".format(modelName)
 
             if filters != None:
-                command += (" WHERE " + fitlers)
+                command += " WHERE " + str(filters)
+            
             
             result = cursor.execute(command)
 
