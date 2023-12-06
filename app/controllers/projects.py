@@ -6,7 +6,7 @@ class Controller(base_controller.BaseController):
     def GET_index(self):
         projects = self.getStorage().selectJson(
             "Projects",
-            ("name", "description")
+            ("rowid", "name", "description")
         )
 
         return self.retJson(projects)
@@ -29,3 +29,32 @@ class Controller(base_controller.BaseController):
             "name": name,
             "description": desc
         })
+
+
+    def GET_tasks(self):
+        tasks =  self.getStorage().selectJson(
+            "Tasks",
+            ("rowid", "projectid", "status", "content")
+        )
+
+        return self.retJson(tasks)
+
+    def POST_tasks(self):
+        projectId   = self.bodyfieldGetOr("projectid", None)
+        status      = self.bodyfieldGetOr("status", None)
+        content     = self.bodyfieldGetOr("content", None)
+
+        if None in (projectId, status, content):
+            return self.retError(HTTPStatus.BAD_REQUEST)
+
+        newObj = {
+            "projectid":    projectId,
+            "status":       status,
+            "content":      content
+        } 
+
+        rowId = self.getStorage().insert("Tasks", newObj)
+
+        newObj["rowid"] = rowId
+
+        return self.retJson(newObj)
