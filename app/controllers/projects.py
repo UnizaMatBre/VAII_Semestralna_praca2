@@ -71,7 +71,7 @@ class Controller(base_controller.BaseController):
             "projectid = {}".format(demandedId)
         )
         
-        return self.retJson(None)
+        return self.retStatus(HTTPStatus.NO_CONTENT)
 
 
     def GET_tasks(self):
