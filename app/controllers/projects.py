@@ -47,7 +47,8 @@ class Controller(base_controller.BaseController):
         return self.retJson({
             "rowid": rowId,
             "name": name,
-            "description": desc
+            "description": desc,
+            "tasks": []
         })
 
 
