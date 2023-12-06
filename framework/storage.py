@@ -28,10 +28,17 @@ class StorageManager:
                 pass
 
 
-            cursor.execute("INSERT INTO {} VALUES ({})".format(
+            typeCheck = lambda val: repr(val) if isinstance(val, str) else str(val)
+
+            command = "INSERT INTO {} VALUES ({})".format(
                 modelName,
-                ",".join(str(i) for i in values)
-            ))
+                ",".join(typeCheck(i) for i in values)
+            )
+                
+            cursor.execute(command)
+
+            
+                
 
             rowId = cursor.lastrowid
 
