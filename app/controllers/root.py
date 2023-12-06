@@ -7,3 +7,29 @@ class Controller(base_controller.BaseController):
         return self.retView()
 
     
+    def GET_projects(self):
+        projects = self.getStorage().selectJson(
+            "Projects",
+            ("name", "description")
+        )
+
+        return self.retJson(projects)
+
+
+    def POST_projects(self):
+        name = self.bodyfieldGetOr("name", None)
+        desc = self.bodyfieldGetOr("description", None)
+
+        if name == None or desc == None:
+            return self.retError(HTTPStatus.BAD_REQUEST)
+
+        rowId = self.getStorage().insert("Projects", {
+            "name":         name,
+            "description":  desc
+        })
+
+        return self.retJson({
+            "rowid": rowId,
+            "name": name,
+            "description": desc
+        })
