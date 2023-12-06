@@ -19,7 +19,10 @@ def View(data):
 	
 		<div class="project-selector"> 
 			<button id="selected-project-button" class="main-button">Button Text</button>
-			<div id="project-list" class="selectable-projects"></div>
+			<div>
+				<div id="project-list" class="selectable-projects"></div>
+				<button id="new-project-button">New project...</Button>
+			</div>
 		</div>
 		
 		
@@ -34,6 +37,6 @@ def View(data):
 		</div>
 		
 	</body>
-    </html>
-    """
+   </html>
+	"""
     
