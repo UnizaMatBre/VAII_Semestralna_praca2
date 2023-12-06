@@ -50,6 +50,28 @@ class Controller(base_controller.BaseController):
             "description": desc,
             "tasks": []
         })
+    
+
+    
+    def DELETE_index(self):
+        demandedId = self.parameterGetOr("rowid", [None])[0]
+        
+        # id parameter is mandatory
+        if demandedId == None:
+            return self.retError(HTTPStatus.BAD_REQUEST)
+
+        self.getStorage().delete(
+            "Projects",
+            "rowid = {}".format(demandedId)
+        )
+        
+        # remove tasks too
+        self.getStorage().delete(
+            "Tasks",
+            "projectid = {}".format(demandedId)
+        )
+        
+        return self.retJson(None)
 
 
     def GET_tasks(self):
