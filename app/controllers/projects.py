@@ -16,6 +16,18 @@ class Controller(base_controller.BaseController):
             ("rowid", "name", "description"),
             filters
         )
+        
+        for project in projects:
+        
+            # get tasks of this project
+            associatedTasks = self.getStorage().selectJson(
+                "Tasks",
+                ("rowid", "projectid", "status", "content"),
+                "projectid = {}".format(project["rowid"])
+            )
+            
+            project["tasks"] = associatedTasks
+
 
         return self.retJson(projects)
 
