@@ -47,3 +47,9 @@ class BaseController:
         return ActionResult(
             "retError", { "status": status, "message": message }
         )
+
+    """
+    Orders handler to return status without body
+    """
+    def retStatus(self, status):
+        return ActionResult("retStatus", status)

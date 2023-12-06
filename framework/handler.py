@@ -312,7 +312,10 @@ class FrameworkHTTPHandler(BasicHTTPHandler):
 
         return None
 
-
+    def retStatus(self, data):
+        self.responseSetStatus(data)
+        
+        return None
 
     """
     Finds and reads public resource (javascript, css, images, videos)
