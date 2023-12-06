@@ -376,11 +376,10 @@ class FrameworkHTTPHandler(BasicHTTPHandler):
         self.sharedHeadGet()
 
     """
-    Handles POST requests.
+    Shared behavior of (P)ost, (P)ut, (P)atch and (D)elete
     Resource files are not allowed and are handled by status error
     """
-    def doPOST(self):
-    
+    def sharedPPPD(self):
         # resource files are not allowed in post requests
         if "." in self.requestGetPath()[-1]:
             self.signalError(HTTPStatus.METHOD_NOT_ALLOWED)
@@ -391,7 +390,43 @@ class FrameworkHTTPHandler(BasicHTTPHandler):
             return None
 
         # evaluate endpoint and return it
-        result = self.evaluateEndpoint()
+        return self.evaluateEndpoint()
+
+    """
+    Handles POST requests.
+    """
+    def doPOST(self):
+        result = self.sharedPPPD()
 
         if result:
             self.responseSetBody(result)    
+    
+    """
+    Handles PUT requests.
+    """
+    def doPUT(self):
+        result = self.sharedPPPD()
+
+        if result:
+            self.responseSetBody(result) 
+
+
+    """
+    Handles PATCH requests.
+    """
+    def doPATCH(self):
+        result = self.sharedPPPD()
+
+        if result:
+            self.responseSetBody(result) 
+
+    """
+    Handles DELETE requests.
+    """
+    def doDELETE(self):
+        result = self.sharedPPPD()
+
+        if result:
+            self.responseSetBody(result) 
+            
+            
