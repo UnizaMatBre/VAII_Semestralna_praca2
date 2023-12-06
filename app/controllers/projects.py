@@ -4,9 +4,17 @@ import base_controller
 
 class Controller(base_controller.BaseController):
     def GET_index(self):
+        demandedId = self.parameterGetOr("rowid", [None])[0]
+        
+        filters = None
+
+        if demandedId != None:
+            filters = "rowid = {}".format(demandedId)
+        
         projects = self.getStorage().selectJson(
             "Projects",
-            ("rowid", "name", "description")
+            ("rowid", "name", "description"),
+            filters
         )
 
         return self.retJson(projects)
@@ -32,9 +40,17 @@ class Controller(base_controller.BaseController):
 
 
     def GET_tasks(self):
+        demandedId = self.parameterGetOr("rowid", [None])[0]
+        
+        filters = None
+
+        if demandedId != None:
+            filters = "rowid = {}".format(demandedId)
+    
         tasks =  self.getStorage().selectJson(
             "Tasks",
-            ("rowid", "projectid", "status", "content")
+            ("rowid", "projectid", "status", "content"),
+            filters
         )
 
         return self.retJson(tasks)
