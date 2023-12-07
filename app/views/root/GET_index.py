@@ -8,6 +8,8 @@ def View(data):
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
 			
+		<link rel="stylesheet" href="main_styles.css">
+		
 		<title>First Page</title>
 	</head>
 	
@@ -18,9 +20,8 @@ def View(data):
 		</div>
 	
 		<div class="project-selector"> 
-			<button id="selected-project-button" class="main-button">Button Text</button>
 			<div>
-				<div id="project-list" class="selectable-projects"></div>
+				<select id="project-list" class="selectable-projects"></select>
 				<button id="new-project-button">New project...</Button>
 			</div>
 		</div>

@@ -1,5 +1,4 @@
 const ContentElement 		= document.getElementById("content");
-const SelectedProjectBttn 	= document.getElementById("selected-project-button");
 const ProjectList 			= document.getElementById("project-list");
 		
 		
@@ -9,18 +8,18 @@ function unselect() {
 		return response.json(); 
 	})
 	.then((data) => {
-		buttons = "";
+		options = "";
 					
 		data.forEach( (item) => {
 					
-			buttons +=  "<button onclick=\"selectProject(" + item["rowid"] + ")\">" + item["name"] + "</button>";
+			options +=  "<option value=" + item["rowid"] + ">" + item["name"] + "</option>";
 						
 		});
 						
-		SelectedProjectBttn.innerHTML = "Select...";
+		options += "<option value='' selected disabled hidden>Select...</option>" 
 		ContentElement.innerHTML = "<h2>No project selected</h2>";
 			
-		ProjectList.innerHTML = buttons;  
+		ProjectList.innerHTML = options;  
 			
 	});
 }
@@ -33,7 +32,7 @@ function selectProject(rowid){
 						
 			selected = null;
 						
-			buttons = "";
+			options = "";
 						
 			data.forEach( (item) => {
 				if(item["rowid"] == rowid ) {
@@ -43,27 +42,26 @@ function selectProject(rowid){
 				}
 								
 						
-				buttons +=  "<button onclick=\"javascript:selectProject(" + item["rowid"] + ")\">" + item["name"] + "</button>";
+				options += "<option value=" + item["rowid"] + ">" + item["name"] + "</option>";
 						
 			});
 						
-						// no selected project? Show prompt to select project
+			// no selected project? Show prompt to select project
 			if(selected == null) {
+				
+				options += "<option value='' selected disabled hidden>Select...</option>"
 							
-				SelectedProjectBttn.innerHTML = "Select...";
 				ContentElement.innerHTML = "<h2>No project selected</h2>";
 			}
 			else {
-				buttons = "<button onclick=javascript:unselect()>= unselect =</button>" + buttons;
-							
-				SelectedProjectBttn.innerHTML = selected["name"];
-							
-				ContentElement.innerHTML = selected["tasks"];
-				
+				options += "<option value=''>..unselect..</option>" + options;
+					
+				options += "<option value=" + selected["rowid"] + "\">" + selected["name"] + "</option>";
+
 				fillContent(selected);
 			};
 					
-			ProjectList.innerHTML = buttons;  
+			ProjectList.innerHTML = options;  
 		});
 };
 		
@@ -104,6 +102,22 @@ window.addEventListener("load", (event) => {
 		});
 	});
 	});
+	
+	ProjectList.addEventListener("change", (eventObj) => {
+		
+		
+		let val = ProjectList.value;
+		
+		if (val === ""){
+			unselect();
+		}
+		else {
+			selectProject(val);
+		}
+		
+	});
+	
+	
 });
 			
 const submit = function(event) {
@@ -179,7 +193,7 @@ function fillContent(project) {
 	
 	bodyElem += "</div>";
 	
-	ContentElement.innerHTML += headElem + bodyElem;
+	ContentElement.innerHTML = headElem + bodyElem;
 	
 	
 }
