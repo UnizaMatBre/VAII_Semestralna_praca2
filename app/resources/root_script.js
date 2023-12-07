@@ -140,6 +140,20 @@ const submit = function(event) {
 	});
 };
 
+function delProject(rowid) {
+	
+	fetch("projects?" +  new URLSearchParams({
+		"rowid": rowid
+	}), 
+	{
+		"method": "DELETE"
+	})
+	.then( (data) => { 
+		unselect();
+	});
+	
+	
+}
 
 function fillContent(project) {
 	let headElem = "<div class='content-head'>";
@@ -148,13 +162,15 @@ function fillContent(project) {
 	
 	headElem += project["description"];
 	
+	headElem += "<button class='task-delete-btn' onclick='delProject(" + project["rowid"] + ")'>X</button>";
+	
 	headElem += "</div>";
 	
 	
 	let bodyElem = "<div class='content-body'>";
 	
 	project["tasks"].forEach( (taskObj) => {
-		bodyElem += "<div class='task-class'>";
+		bodyElem += "<div class='task-class'>"; 
 		
 			bodyElem += "<div class='task-header'>";
 		
