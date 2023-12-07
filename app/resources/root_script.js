@@ -99,9 +99,6 @@ const ContentElement 		= document.getElementById("content");
 								
 							})
 							.then( (data) => { 
-							
-								console.log(data);
-								
 								selectProject(parseInt(data["rowid"]));
 							});
 							
