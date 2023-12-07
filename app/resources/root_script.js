@@ -54,9 +54,9 @@ function selectProject(rowid){
 				ContentElement.innerHTML = "<h2>No project selected</h2>";
 			}
 			else {
-				options += "<option value=''>..unselect..</option>" + options;
+				options = "<option value=''>..unselect..</option>" + options;
 					
-				options += "<option value=" + selected["rowid"] + "\">" + selected["name"] + "</option>";
+				options += "<option value=" + selected["rowid"] + " selected disabled hidden>" + selected["name"] + "</option>";
 
 				fillContent(selected);
 			};
@@ -142,7 +142,7 @@ const submit = function(event) {
 
 
 function fillContent(project) {
-	let headElem = "<div id='content-head'>";
+	let headElem = "<div class='content-head'>";
 	
 	headElem += "<h2>" + project["name"] + "</h2>";
 	
@@ -151,39 +151,38 @@ function fillContent(project) {
 	headElem += "</div>";
 	
 	
-	let bodyElem = "<div id='content-body'>";
+	let bodyElem = "<div class='content-body'>";
 	
 	project["tasks"].forEach( (taskObj) => {
-		bodyElem += "<div>";
+		bodyElem += "<div class='task-class'>";
 		
-		bodyElem += "<div>";
+			bodyElem += "<div class='task-header'>";
 		
-		bodyElem += "<h5>"
+				bodyElem += "<h2>"
 		
-		bodyElem += taskObj["rowid"];
+				bodyElem += taskObj["rowid"];
 		
-		bodyElem += "</h5>";
+				bodyElem += "</h2>";
 
-		bodyElem += "<select id='status' name='status'>";	
+				bodyElem += "<button class='task-delete-btn' onclick='delTask(" + taskObj["rowid"] + ")'></button>";
 		
-		["open", "closed"].forEach( (statusVal) => {
-			bodyElem += "<option value ='" + statusVal + "'>" + statusVal + "</option>";
+			bodyElem += "</div>";
+		
+		
+			bodyElem += "<div class='task-body'>";
+		
+				bodyElem += taskObj["content"];
+		
+				bodyElem += "<select id='status' name='status' class='task-selector'>";	
+		
+				["open", "closed"].forEach( (statusVal) => {
+					bodyElem += "<option value ='" + statusVal + "'>" + statusVal + "</option>";
 
-		});
+				});
 		
-		bodyElem += "</select>"
-
-
-		bodyElem += "<button id='task-delete-btn' onclick='delTask(" + taskObj["rowid"] + ")'></button>";
+				bodyElem += "</select>"
 		
-		bodyElem += "</div>";
-		
-		
-		bodyElem += "<div>";
-		
-		bodyElem += taskObj["content"];
-		
-		bodyElem += "</div>";
+			bodyElem += "</div>";
 
 		bodyElem += "</div>"; 
 		

@@ -80,3 +80,39 @@
 	float: left;
 	
 }
+
+
+.content-head {
+	border: solid;
+	
+
+	
+	
+}
+
+.content-head h2 {
+	position: relative;
+	
+}
+
+.task-delete-btn {
+	float: right;
+	
+	width: 50px;
+	height: 100%;
+	
+}
+
+.task-selector {
+	float: right;
+	
+}
+
+.task-header {
+	background-color: red;
+}
+
+.task-body {
+	background-color: blue;
+	
+}

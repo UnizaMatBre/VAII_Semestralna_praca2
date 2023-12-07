@@ -20,10 +20,9 @@ def View(data):
 		</div>
 	
 		<div class="project-selector"> 
-			<div>
-				<select id="project-list" class="selectable-projects"></select>
-				<button id="new-project-button">New project...</Button>
-			</div>
+			<select id="project-list" class="selectable-projects"></select>
+			<button id="new-project-button" class="project-maker-btn">New project...</Button>
+			
 		</div>
 		
 		
