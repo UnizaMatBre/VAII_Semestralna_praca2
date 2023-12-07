@@ -164,7 +164,7 @@ function fillContent(project) {
 		
 				bodyElem += "</h2>";
 
-				bodyElem += "<button class='task-delete-btn' onclick='delTask(" + taskObj["rowid"] + ")'></button>";
+				bodyElem += "<button class='task-delete-btn' onclick='delTask(" + taskObj["rowid"] + ")'>X</button>";
 		
 			bodyElem += "</div>";
 		

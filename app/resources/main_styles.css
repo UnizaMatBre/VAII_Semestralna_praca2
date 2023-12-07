@@ -84,11 +84,13 @@
 
 .content-head {
 	border: solid;
-	
-
-	
-	
 }
+
+.task-class {
+	border-top: dashed;
+	display:flex;
+}
+
 
 .content-head h2 {
 	position: relative;
@@ -109,10 +111,22 @@
 }
 
 .task-header {
-	background-color: red;
+	display: inline-block;
+	background-color: #777777;
+	height: 100%;
+	
+	width: 20%
 }
 
 .task-body {
-	background-color: blue;
+	display: inline-block;
+	background-color: #999999;
+	height: 100%;
 	
+	width: 80%;
+	
+}
+
+.task-header h2 {
+	padding-left: 10px;
 }
