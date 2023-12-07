@@ -36,6 +36,28 @@ def View(data):
 			Donec ut libero a ex finibus accumsan ac at quam. Curabitur at est pulvinar, tempus lorem ut, facilisis urna. Nam sed porta massa. Aliquam arcu eros, porttitor vitae diam vel, auctor posuere libero. Mauris tempus pharetra diam at consequat. Aenean luctus tincidunt ligula sit amet maximus. Fusce sed odio consequat, blandit lacus vel, condimentum nisi. Fusce placerat, ex quis maximus euismod, augue quam suscipit sem, et aliquam odio odio non massa. Nulla facilisi. Vestibulum eu odio facilisis, laoreet lorem id, lacinia nunc. Maecenas in augue volutpat, mattis velit sed, gravida massa. 
 		</div>
 		
+		
+		
+		<script>
+			window.addEventListener("load", (event) => {
+				// new project button event
+				document.getElementById("new-project-button").addEventListener("click", (event) => {
+					fetch("?action=projectmaker", {
+						"method": "GET"
+					
+					})
+					.then( (response) => {
+						return response.text();
+					})
+					.then( (data) => { 
+						document.getElementById("content").innerHTML = data
+					});
+				
+				});
+			
+			
+			});
+		</script>
 	</body>
    </html>
 	"""
