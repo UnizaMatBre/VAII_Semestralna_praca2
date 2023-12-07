@@ -78,10 +78,58 @@ const ContentElement 		= document.getElementById("content");
 						return response.text();
 					})
 					.then( (data) => { 
-						document.getElementById("content").innerHTML = DOMParser().fr;
+						document.getElementById("content").innerHTML = data;
+						
+						document.getElementById("project-make-form").addEventListener("submit", (eventObj) => {
+							eventObj.preventDefault();
+							
+							let name = document.getElementById("project-name").value;
+							let desc = document.getElementById("project-desc").value;
+			
+			
+							fetch("projects", {
+								"method": "POST",
+								"body": JSON.stringify({
+									"name": name,
+									"description": desc
+								})
+							})
+							.then( (response) => {
+								return response.json();
+								
+							})
+							.then( (data) => { 
+							
+								console.log(data);
+								
+								selectProject(parseInt(data["rowid"]));
+							});
+							
+							
+						});
 					});
 				
 				});
 			
 			
 			});
+			
+const submit = function(event) {
+				
+	let name = document.getElementById("project-name").value;
+	let desc = document.getElementById("project-desc").value;
+			
+			
+	fetch("projects", {
+		"method": "POST",
+		"body": JSON.stringify({
+			"name": name,
+			"description": desc
+		})
+	})
+	.then( (data) => { 
+		console.log(data);
+				
+		selectProject(data["rowid"])
+	});
+};
